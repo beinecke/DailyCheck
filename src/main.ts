@@ -1,12 +1,20 @@
-import 'vuetify/styles' // Global CSS has to be imported
 import { createApp } from 'vue'
-import router from './router'
-import { createVuetify } from 'vuetify'
 import App from './App.vue'
+import router from './router'
+import vuetify from './plugins/vuetify'
+import { loadFonts } from './plugins/webfontloader'
+import axios from 'axios'
+import All from './mock/index'
+import './assets/site.css'
 
-const app = createApp(App)
-const vuetify = createVuetify(...) // Replaces new Vuetify(...)
+axios.defaults.baseURL = 'http://localhost:8080'
 
-app.use(vuetify)
+console.log('import all', All)
+loadFonts()
 
-createApp(App).use(router).mount('#app')
+createApp(App)
+  .use(router)
+  .use(vuetify)
+  .mount('#app')
+
+//App.config.globalProperties.$axios = axios
